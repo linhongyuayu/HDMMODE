@@ -1,0 +1,35 @@
+path,category,scope,bytes,git_blob_sha,checks
+ARCHIVE_INDEX.json,configuration-or-structured-data,tracked-version; authority requires project record,10184,4a02f4d8ce83f39f5ae066e11141b5792c98ed21,git-blob-bytes-match; json-parse-pass
+ARCHIVE_INDEX.md,documentation,tracked-version; authority requires project record,6394,50e460922fada98e9ef7ffd84044937be1c87b39,git-blob-bytes-match
+FILEMAP.csv,navigation-index,generated-catalog,,,self-index; verified as Git object; hash excluded to avoid recursion
+FILEMAP.md,navigation-index,generated-catalog,,,self-index; verified as Git object; hash excluded to avoid recursion
+HDMMF.zip,archive-package,tracked-version; authority requires project record,19766100,10ad446f288bc63b351408ec7a178830c9441bef,git-blob-bytes-match; zip-crc-all-members-pass
+HDMMODE.zip,archive-package,tracked-version; authority requires project record,10367,c74bb20d964a3a6ee4d08abbd6196ef1468fbe41,git-blob-bytes-match; zip-crc-all-members-pass
+JAS-2024-0096_print.pdf,paper-or-document,tracked-version; authority requires project record,2326354,8e213b7ea5e9ea0fca5934df2d70b65390be48a3,git-blob-bytes-match
+README.md,documentation,tracked-version; authority requires project record,2425,84635b74e569474a111f2d08e1469feca5733898,reviewed-change
+source/HDMMF/HDMMF/NMMF1.m,source-code,archive-browsing-copy,3330,1a26f027ef885d78184b4cca4e4d76a2e112de94,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF10.m,source-code,archive-browsing-copy,3957,5ce48f4d0ef8827efb7ef0ccbeeba6176ae85dbd,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF11.m,source-code,archive-browsing-copy,6157,da3c530fd97ae877e095403812232e1b4c5fdc88,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF12.m,source-code,archive-browsing-copy,5591,e9af9fbe2726e940378c23b686a3e31b5091b658,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF13.m,source-code,archive-browsing-copy,4430,7e6a50581492618c2661bbe0d67a85dfb98c6eed,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF14.m,source-code,archive-browsing-copy,4649,922bfb97c5f596b9bb0e0ee5d14805e35034d74d,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF15.m,source-code,archive-browsing-copy,5992,be5dd19009339f22ce4db8c7e67c9e64b5f1dabe,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF2.m,source-code,archive-browsing-copy,2486,864eb7555ac75af182209721d23d63c88b84e7c6,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF3.m,source-code,archive-browsing-copy,4171,3234e1023be68a9afea5b836f3bf2eba3e50883e,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF4.m,source-code,archive-browsing-copy,3556,251ab1977fe94445523d14390d01c2c7ddef8c5b,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF5.m,source-code,archive-browsing-copy,4404,e16b4e26fbcb44e9525cd1cb2f5011a599848646,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF6.m,source-code,archive-browsing-copy,4028,3453654acb0d8628b5f21d4c20a4ce0fbc5737b3,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF7.m,source-code,archive-browsing-copy,4320,199c6cdd4907631bcdad3897816386ee9aa3c979,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF8.m,source-code,archive-browsing-copy,3524,7f5a582b19a6f0abcb9dde7592d5b63633754cc3,git-blob-bytes-match
+source/HDMMF/HDMMF/NMMF9.m,source-code,archive-browsing-copy,4538,1b21cf919f1f2cc1ef1c934a20750c40998b7d9f,git-blob-bytes-match
+source/HDMMODE/Convertion2.m,source-code,archive-browsing-copy,221,74c6df05ea30ed84de49a94bebbd3fad3326ac8f,git-blob-bytes-match
+source/HDMMODE/Crowding.m,source-code,archive-browsing-copy,419,7549975da8996e396eebc161af6b0a80149a16b2,git-blob-bytes-match
+source/HDMMODE/Environmental_Selection.m,source-code,archive-browsing-copy,6182,15d151735a0247a58548bd47cb930931174199a9,git-blob-bytes-match
+source/HDMMODE/Environmental_Selection_2.m,source-code,archive-browsing-copy,6151,5f9913aa9771f9f3b6b4b6635800d56b02ce3847,git-blob-bytes-match
+source/HDMMODE/HDMMODE.m,source-code,archive-browsing-copy,7572,8c6483f353f3c57bd68391d54cc552568f1a90f0,git-blob-bytes-match
+source/HDMMODE/NCM.m,source-code,archive-browsing-copy,628,173467b39d7ba2ecc4f489cea2648e5e8115368a,git-blob-bytes-match
+source/HDMMODE/NDSort.m,source-code,archive-browsing-copy,6717,9bdbce15ec2952bef968fb21c7640f6483c51292,git-blob-bytes-match
+source/HDMMODE/Normalization2.m,source-code,archive-browsing-copy,835,4c1c03ecd908911677b75852782284628277024e,git-blob-bytes-match
+source/HDMMODE/OperatorDE_single.m,source-code,archive-browsing-copy,1524,3705179d6deff2c25d09e886072343afbde28514,git-blob-bytes-match
+source/HDMMODE/Penalty_Choose.m,source-code,archive-browsing-copy,340,a38cf4da26af8541af749c6a1dc8a659ca457398,git-blob-bytes-match
+source/HDMMODE/Truncation2.m,source-code,archive-browsing-copy,428,2052a9ba6ba966f1dd72529043d53da3ce0b2154,git-blob-bytes-match
