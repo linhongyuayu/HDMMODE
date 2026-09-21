@@ -1,0 +1,176 @@
+classdef NMMF15 < PROBLEM
+    % <multi> <real> <multimodal>
+    % Multi-modal multi-objective test function
+    %------------------------------- Copyright --------------------------------
+    % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
+    % research purposes. All publications which use this platform or any code
+    % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+    % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+    % for evolutionary multi-objective optimization [educational forum], IEEE
+    % Computational Intelligence Magazine, 2017, 12(4): 73-87".
+    %--------------------------------------------------------------------------
+    properties
+        h;   
+        THETA_;
+        K   
+        q1  
+        q2   
+        Q1  
+        Q2   
+        Q
+        alpha
+    end
+    methods
+        
+
+        function Setting(obj)
+            obj.M = 2;
+            obj.K=3; 
+
+            if isempty(obj.D); obj.D = 30; end
+            obj.q1= ceil(obj.D* (0.1));
+            obj.q2 = ceil(obj.D* (0.4));
+            b = (0.7:0.01:1)';
+            index =  - (1./b).^(obj.q1-3) + (1./b).^(obj.q1-2) <= (20/8);
+            obj.alpha = min (b(index));
+            obj.lower(:,1:obj.K) = zeros(1,obj.K);
+            obj.lower(:,obj.K+1 : obj.K+obj.q1) = zeros(1,obj.q1)- 10;
+            obj.lower(:,obj.K+obj.q1+1 : obj.K+obj.q1+obj.q2) = zeros(1,obj.q2) - 10;
+            
+            obj.upper    = ones(1,obj.K); 
+            obj.upper(:,obj.K+1 : obj.K+obj.q1)= 10.*ones(1,obj.q1);
+            obj.upper(:,obj.K+obj.q1+1 : obj.K+obj.q1+obj.q2) = 10.*ones(1,obj.q2);
+
+            obj.lower(:,obj.K+obj.q1+obj.q2+1 : obj.D) = 0.*ones(1,obj.D-(obj.K+obj.q1+obj.q2));
+            obj.upper(:,obj.K+obj.q1+obj.q2+1 : obj.D)= 10.*ones(1,obj.D-(obj.K+obj.q1+obj.q2));
+            obj.encoding = 'real';
+        end
+
+
+            function PopObj = CalObj(obj,PopDec)
+                OptX = 0.2;               
+                [N,~]  = size(PopDec);
+                M      = obj.M;
+                Pop=PopDec;
+
+
+                T(:,1)=PopDec(:,3);
+                T(:,2)=sqrt( PopDec(:,1).^2 + PopDec(:,2).^2 );
+                obj.THETA_=zeros(N,1);
+                for i=1:N
+                    obj.THETA_(i) = 2/pi*atan(T(i,2)./T(i,1));
+                    if T(i,1)==0
+                        obj.THETA_(i) = 1;
+                    end
+                end
+
+
+for i=obj.K +1  : 1 : obj.K+obj.q1
+    PopDec(:,i)=(1+i./(obj.K+obj.q1)).*(2.*Pop(:,i)-obj.lower(i))...
+        -obj.THETA_.*(obj.upper(i)-obj.lower(i));
+end
+    
+
+for i=obj.K+obj.q1+1 : 2 : obj.K+obj.q1+obj.q2
+    PopDec(:,i)=(1+cos(pi./2.*(i./(obj.K+obj.q1+obj.q2)))).*(2.*Pop(:,i)-obj.lower(i))...
+        -( (Pop(:,obj.K+1)-obj.lower(obj.K+1))./(obj.upper(obj.K+1)-obj.lower(obj.K+1))).*(obj.upper(i)-obj.lower(i));
+end
+
+for i=obj.K+obj.q1+2 : 2 : obj.K+obj.q1+obj.q2
+    PopDec(:,i)=(1+i./(obj.K+obj.q1+obj.q2)).*(2.*Pop(:,i)-obj.lower(i))...
+        -( (Pop(:,obj.K+1)-obj.lower(obj.K+1))./(obj.upper(obj.K+1)-obj.lower(obj.K+1))).*(obj.upper(i)-obj.lower(i));
+end
+
+
+obj.Q1=Sin(PopDec, obj.alpha,obj.K,obj.q1);
+
+
+X_Q2=PopDec(:,obj.K+obj.q1+1 : obj.K+obj.q1+obj.q2);
+obj.Q2=Pathological(X_Q2);
+
+
+obj.Q = obj.Q1 + obj.Q2;
+
+           
+obj.h = 20 - 20 * exp(-0.2 * sqrt( sum((PopDec(:,obj.K+obj.q1+obj.q2+1:end) - OptX).^2,2))./(obj.D-(obj.K+obj.q1+obj.q2))) + exp (1)...  
+                            - exp(sum(    cos(2 * pi .*(PopDec(:,obj.K+obj.q1+obj.q2+1:end) - OptX)),2)./(obj.D-(obj.K+obj.q1+obj.q2)));        
+
+                T_=zeros(N,1);
+                G_=zeros(N,M);
+                for i=1:N
+                    T_(i) = (1 - (T(i,1)^2 + T(i,2)^2)).^2  + obj.Q(i) + obj.h(i);
+                    G_(i,1:M) = [ones(1,1) cumprod(obj.THETA_(i),2)] .* [1-obj.THETA_(i) ones(1,1)];
+                end
+                PopObj = G_ .* repmat((1+T_),1,M) ;      
+                PopObj=real(PopObj);
+            end
+
+
+        function R = GetOptimum(~,~)
+            R = load('NMMF15_Reference_PSPF_data.mat','PF');
+            R=R.PF;
+        end
+
+        function R = GetPF(obj)
+            if obj.M == 2
+                R = load('NMMF15_Reference_PSPF_data.mat','draw_pf');
+                R=R.draw_pf;
+            else
+                R = [];
+            end
+        end
+
+        function score = CalMetric(obj,metName,Population)
+            load('NMMF15_Reference_PSPF_data');
+            obj.POS = PS;
+            obj.optimum = PF;
+            switch metName
+                case 'IGDX'
+                    score = feval(metName,Population,obj.POS);
+                otherwise
+                    score = feval(metName,Population,obj.optimum);
+            end
+        end
+    end
+end
+
+function Answer = Sin(PopDec,alpha,K,q1)
+    y=PopDec(:,K+1: K+q1);
+    T=cumsum(y,2);
+    n = K+2 : K+q1 ;
+    for k=1:size(PopDec,1)
+        Answer(k,:)=  100.*(1- sin( (1/8)*2*pi*(T(k,1) - 2)  )).^2 + 50.*sum(n.*(alpha.*T(k,2:end) - T(k,1:end-1)).^2);
+    end
+end
+
+function y=Pathological(x)
+      [N1,q1]=size(x);
+      y=zeros(N1,1);
+      r=r_cal(x(:,1));
+      for i=2:q1
+          if i==q1
+            x(:,i+1)=x(:,1);
+          end
+          y1= 50.*sin(sqrt(100.* (x(:,i+1)-x(:,i)).^2 + (x(:,i)-x(:,i-1)).^2)).^2 + 1*r -1 ;
+          y2= 1 + 1.*( (x(:,i+1)-x(:,i)).^2 - 2.*(x(:,i+1)-x(:,i)).*(x(:,i)-x(:,i-1)) + (x(:,i)-x(:,i-1)).^2).^2;
+          y = y+ y1./y2 +1; 
+      end
+end
+
+     
+function r=r_cal(x)
+n=size(x,1);
+for jj=1:n
+    if x(jj,1)>5
+        r(jj,:)=25.*(x(jj,1)-6).^2;
+    elseif x(jj,1)<-5
+        r(jj,:)=25./4.*(x(jj,1)+7).^2;
+    else
+        if x(jj,1)>=0
+            r(jj,:)= abs((0.508333333333333).*x(jj,1).^3 - (1.641666666666664).*x(jj,1).^2 + 5/2);
+        else
+            r(jj,:)=(3/2).*(x(jj,1)+1).^2+1;
+        end
+    end
+end
+end
