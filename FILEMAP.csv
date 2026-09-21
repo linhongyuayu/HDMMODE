@@ -6,7 +6,7 @@ FILEMAP.md,navigation-index,generated-catalog,,,self-index; verified as Git obje
 HDMMF.zip,archive-package,tracked-version; authority requires project record,19766100,10ad446f288bc63b351408ec7a178830c9441bef,git-blob-bytes-match; zip-crc-all-members-pass
 HDMMODE.zip,archive-package,tracked-version; authority requires project record,10367,c74bb20d964a3a6ee4d08abbd6196ef1468fbe41,git-blob-bytes-match; zip-crc-all-members-pass
 JAS-2024-0096_print.pdf,paper-or-document,tracked-version; authority requires project record,2326354,8e213b7ea5e9ea0fca5934df2d70b65390be48a3,git-blob-bytes-match
-README.md,documentation,tracked-version; authority requires project record,2425,84635b74e569474a111f2d08e1469feca5733898,reviewed-change
+README.md,documentation,tracked-version; authority requires project record,2781,6df066b7970687ac24d46622d2a83e0957f48f7e,reviewed-change; solver-policy-documentation-only
 source/HDMMF/HDMMF/NMMF1.m,source-code,archive-browsing-copy,3330,1a26f027ef885d78184b4cca4e4d76a2e112de94,git-blob-bytes-match
 source/HDMMF/HDMMF/NMMF10.m,source-code,archive-browsing-copy,3957,5ce48f4d0ef8827efb7ef0ccbeeba6176ae85dbd,git-blob-bytes-match
 source/HDMMF/HDMMF/NMMF11.m,source-code,archive-browsing-copy,6157,da3c530fd97ae877e095403812232e1b4c5fdc88,git-blob-bytes-match

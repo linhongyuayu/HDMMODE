@@ -1,5 +1,9 @@
 # HDMMODE
 
+<!-- solver-policy-20260922 -->
+> **2026-09-22 求解器决定：** 今后不再使用 Gurobi，也不再要求许可证或续期。采用当前项目已验证的替代器；尚未迁移的旧入口保持停用。历史结果及求解器标注保留。本段即本仓当前求解器约束；不改写历史实验记录。
+<!-- /solver-policy-20260922 -->
+
 **[逐文件路径与分类](FILEMAP.md) · [机器可读清单](FILEMAP.csv)**
 
 Materials for Multiobjective Differential Evolution for Higher-Dimensional Multimodal Multiobjective Optimization.
